@@ -1,17 +1,16 @@
-from bs4 import BeautifulSoup as bs
-import time
+from webdriver_manager.firefox import GeckoDriverManager
 
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.firefox import GeckoDriverManager
+
+from bs4 import BeautifulSoup as bs
 
 url = 'https://moonarch.app/miners'
+driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
 
 def get_miners_list():
-    driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
 
     # driver.implicitly_wait(10)
     driver.get(url)
@@ -32,6 +31,3 @@ def get_miners_list():
         mainers_group_list.append(e.text)
 
     return mainers_group_list
-
-
-get_miners_list()
