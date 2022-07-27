@@ -152,4 +152,4 @@ cython_debug/
 #.idea/
 
 tmp
-env_variables
+variables
