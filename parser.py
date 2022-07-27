@@ -16,22 +16,22 @@ def get_miners_list():
     # driver.implicitly_wait(10)
     driver.get(url)
 
-    el_button = WebDriverWait(driver, 20).until(lambda d: d.find_element(By.CLASS_NAME, 'bottom-action-bar'))
-    el_button.click()
+    button_element = WebDriverWait(driver, 20).until(lambda d: d.find_element(By.CLASS_NAME, 'bottom-action-bar'))
+    button_element.click()
     
-    el_button = WebDriverWait(driver, 20).until(lambda d: d.find_element(By.CLASS_NAME, 'table-pin'))
+    WebDriverWait(driver, 20).until(lambda d: d.find_element(By.CLASS_NAME, 'table-pin'))
     
     html = driver.page_source
     driver.close()
     soup = bs(html, 'html.parser')
     
-    el = soup.select('table#__BVID__68 tr > td:nth-of-type(2) > a')
+    mainers_elements_resultset = soup.select('table#__BVID__68 tr > td:nth-of-type(2) > a')
     
-    group_list = []
-    for e in el:
-        group_list.append(e.text)
+    mainers_group_list = []
+    for e in mainers_elements_resultset:
+        mainers_group_list.append(e.text)
 
-    return group_list
+    return mainers_group_list
 
 
 get_miners_list()
