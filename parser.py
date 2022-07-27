@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup as bs
 url = 'https://moonarch.app/miners'
 driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
 
-def get_miners_list():
+def get_miners_list() -> list:
 
     # driver.implicitly_wait(10)
     driver.get(url)
@@ -26,8 +26,11 @@ def get_miners_list():
     
     mainers_elements_resultset = soup.select('table#__BVID__68 tr > td:nth-of-type(2) > a')
     
-    mainers_group_list = []
+    mainers = set()
     for e in mainers_elements_resultset:
-        mainers_group_list.append(e.text)
+        mainers.add(e.text)
 
-    return mainers_group_list
+    return list(mainers)
+
+if __name__ == '__main__':
+    print(get_miners_list())

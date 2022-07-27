@@ -5,9 +5,9 @@ import parser
 from dotenv import dotenv_values
 
 config = dotenv_values('variables')
-SECRET_KEY = config['SECRET_KEY']
+TOKEN = config['TOKEN']
 
-bot = telebot.TeleBot(SECRET_KEY)
+bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands = ['start'])
 def start_message(message):
@@ -16,7 +16,7 @@ def start_message(message):
 @bot.message_handler(commands = ['update'])
 def update_message(message):
 
-    miners_list = list(set(parser.get_miners_list()))
+    miners_list = parser.get_miners_list()
     miners_per_message = 100
     messages_number = len(miners_list) // miners_per_message
 
